@@ -78,7 +78,10 @@ for i in range(NUMBER_OF_CLONES):
     matriz_string.append(temp_string)
 
 while highest_score < message_length:
-    # NEEDS A COMMENT HERE
+    # Creates n clones of the message that got the closest to the
+    # desired_message, has a chance to mutate any letter of the clones
+    # Repeats this process until a string matchs all the letters
+    # of the desired_message
     highest_score = 0
     for i in range(NUMBER_OF_CLONES):
         # Checks the highest score, if tied chooses the first one to appear
@@ -86,11 +89,11 @@ while highest_score < message_length:
         if temp_score > highest_score:
             highest_score_position = i
             highest_score = temp_score
-
     winner_string = matriz_string[highest_score_position]
+    
     print(f"Winner of generation {generation}: {winner_string}"
           f" Score: {highest_score}")
-    generation += 1
 
     for i in range(NUMBER_OF_CLONES):
         matriz_string[i] = mutate_string(winner_string)
+    generation += 1
