@@ -16,18 +16,17 @@ NUMBER_OF_CLONES = 100
 
 # Generates and returns a character that can be any
 # lower or uppercase letters or an empty space
-# checks to see if the char is not the excluded_char
+# Checks to see if the char is not the excluded_char,
+# if it is chooses another char
 def random_char(excluded_char=''):
     char = excluded_char
     while char == excluded_char:
         offset = random.randrange(0, 53)
         if offset == 0:
             char = ' '
-
         elif 0 < offset <= 26:
             # Returns a uppercase letter
             char = chr(65 + offset - 1)
-
         else:
             # Returns a lowercase letter
             char = chr(97 + offset - 27)
@@ -78,9 +77,10 @@ for i in range(NUMBER_OF_CLONES):
     matriz_string.append(temp_string)
 
 while highest_score < message_length:
-    # Creates n clones of the message that got the closest to the
-    # desired_message, has a chance to mutate any letter of the clones
-    # Repeats this process until a string matchs all the letters
+    # Creates n clones of the string that got the closest to the
+    # desired_message
+    # Has a percentage chance to mutate any letter of the clones
+    # Repeats this process until a string matches all the letters
     # of the desired_message
     highest_score = 0
     for i in range(NUMBER_OF_CLONES):
@@ -90,10 +90,13 @@ while highest_score < message_length:
             highest_score_position = i
             highest_score = temp_score
     winner_string = matriz_string[highest_score_position]
-    
+
+    # Prints the highest scoring string of the screen
     print(f"Winner of generation {generation}: {winner_string}"
           f" Score: {highest_score}")
 
     for i in range(NUMBER_OF_CLONES):
+        # Replaces the old matriz of strings with a new one made of
+        # n mutated clones from the winner_string
         matriz_string[i] = mutate_string(winner_string)
     generation += 1
