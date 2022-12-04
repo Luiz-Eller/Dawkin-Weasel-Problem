@@ -9,14 +9,14 @@ Last Modified on: 01/12/2022
 import random
 
 # Declare Constants
-USE_DEFAULT_MESSAGE = False
+USE_DEFAULT_MESSAGE = True
 LETTER_MUTATION_PERCENTAGE = 5
 NUMBER_OF_CLONES = 100
 
 
 # Generates and returns a character that can be any
 # lower or uppercase letters or an empty space
-# checks to see if the char is not the excluded char
+# checks to see if the char is not the excluded_char
 def random_char(excluded_char=''):
     char = excluded_char
     while char == excluded_char:
@@ -35,8 +35,8 @@ def random_char(excluded_char=''):
 
 
 def give_score(desired_string, current_string):
-    # Returns the number of letter that match (same letter and position)
-    # between two strings
+    # Returns the number of letter that match
+    # (same letter and position) between two strings
     # Is case-sensitive
     score = 0
     goal = list(desired_string)
@@ -58,26 +58,27 @@ def mutate_string(text):
 
 
 # Initializes variables
-if USE_DEFAULT_MESSAGE:
-    desired_message = "METHINKS IT IS LIKE A WEASEL"
-else:
-    desired_message = input()
-message_length = len(desired_message)
 matriz_string = []
 highest_score = 0
 highest_score_position = 0
 generation = 0
 
+if USE_DEFAULT_MESSAGE:
+    desired_message = "METHINKS IT IS LIKE A WEASEL"
+else:
+    desired_message = input()
+message_length = len(desired_message)
 
 for i in range(NUMBER_OF_CLONES):
     # Initializes the strings, all with random characters
-    # Only creates strings of the same length as the desired message
+    # Only creates strings of the same length as the desired_message
     temp_string = ''
     for j in range(message_length):
         temp_string += random_char()
     matriz_string.append(temp_string)
 
 while highest_score < message_length:
+    # NEEDS A COMMENT HERE
     highest_score = 0
     for i in range(NUMBER_OF_CLONES):
         # Checks the highest score, if tied chooses the first one to appear
