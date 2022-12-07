@@ -51,7 +51,7 @@ def mutate_string(text):
     # to swapped with a new random one
     mutated_text = list(text)
     for ite in range(len(mutated_text)):
-        if random.randint(0, 100) < LETTER_MUTATION_PERCENTAGE:
+        if random.randint(0, 100) <= LETTER_MUTATION_PERCENTAGE:
             mutated_text[ite] = random_char(mutated_text[ite])
     return "".join(mutated_text)
 
